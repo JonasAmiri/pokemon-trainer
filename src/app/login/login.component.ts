@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { pipe } from 'rxjs';
+import { User } from 'src/models/user.models';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -9,21 +11,22 @@ import { LoginService } from '../services/login.service';
 })
 export class LoginComponent {
 
-  constructor(private readonly loginService: LoginService){}
+  constructor(private readonly loginService: LoginService) { }
 
-  public loginSubmit(loginForm: NgForm): void{
+  public loginSubmit(loginForm: NgForm): void {
 
-    this.loginService.login().subscribe({
-      next: () => {
+    //username
+    const { username } = loginForm.value;
 
-      },
-      error: () => {
-        
-      }
-    })
+    this.loginService.login(username)
+      .subscribe({
+        next: (user: User | undefined) => {
+
+        },
+        error: () => {
+
+        }
+      })
 
   }
-
-
-
 }
