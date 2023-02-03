@@ -4,9 +4,15 @@ import { CatalogueComponent } from './catalogue/catalogue.component';
 import { LoginComponent } from './login/login.component';
 import { TrainerComponent } from './trainer/trainer.component';
 
-const appRoutes: Routes = [
+const appRoutes: Routes = [ 
   {
-    path: '',
+    path:'',
+    pathMatch: 'full',
+    redirectTo: '/login'
+  },
+  
+  {
+    path: 'login',
     component: LoginComponent,
   },
   {

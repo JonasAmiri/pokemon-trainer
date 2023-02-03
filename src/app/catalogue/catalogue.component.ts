@@ -13,7 +13,7 @@ export class CatalogueComponent {
   ngOnInit() {
     // Subscribe to the observable returned by the 'fetchPokemin' method
     this.pokemonCatalogueService.fetchPokemons().subscribe((data) => {
-      console.log(data.results);
+      console.log(data);
     });
   }
 }
