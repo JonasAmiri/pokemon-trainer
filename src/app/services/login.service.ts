@@ -1,15 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, of, switchMap } from 'rxjs';
-import { environment } from 'src/environments/environment';
+//import { environment } from 'src/environments/environment';
 import { User } from 'src/models/user.models';
 
-const {apiTrainers, apikey} = environment;
+//const {apiTrainers, apikey} = environment;
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
+  API_TRAINERS = 'https://noroff-api-production-c63f.up.railway.app/trainers'
+  API_KEY = 'SECRET'
 
   //Dependency Injection
   constructor(private readonly http: HttpClient) { }
@@ -30,7 +32,7 @@ export class LoginService {
   //Check if user exist
 
   private checkUsername(username: string):Observable<User | undefined>{
-    return this.http.get<User[]>(`${apiTrainers}?username${username}`)
+    return this.http.get<User[]>(`${this.API_TRAINERS}?username${username}`)
     .pipe(
       //RxJS operators
       map((response: User[]) => {
@@ -49,9 +51,9 @@ export class LoginService {
 
     const headers = new HttpHeaders ({
       "content-Type": "application/json",
-      "x-api-key": apikey
+      "x-api-key": this.API_KEY
     });
-    return this.http.post<User>(apiTrainers, user,{
+    return this.http.post<User>(this.API_TRAINERS, user,{
       headers
     })
  
